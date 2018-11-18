@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -eu
+
+if [ "${BUILDKITE_AGENT_ALLOW_FORKS:-false}" != "true" ]; then
+  # Third-party forks have colons in their branch name.
+  case "$BUILDKITE_BRANCH" in
+    *:*) echo "Third-party forks aren't allowed" && exit 1
+  esac
+fi
+
+PASSED_WHITELIST="false"
+
+IFS=","; for pattern in $BUILDKITE_AGENT_WHITELIST_PIPELINES; do
+  if [ "$pattern" == "${BUILDKITE_PIPELINE_SLUG}/${BUILDKITE_BRANCH}" ]; then
+    PASSED_WHITELIST="true"
+    echo "Whitelist pattern '$pattern' allowed"
+  fi
+
+  if [ "$pattern" = "${BUILDKITE_PIPELINE_SLUG}" ]; then
+    PASSED_WHITELIST="true"
+    echo "Whitelist pattern '$pattern' allowed"
+  fi
+done; IFS=
+
+if [ "$PASSED_WHITELIST" != "true" ]; then
+  echo "${BUILDKITE_PIPELINE_SLUG}/${BUILDKITE_BRANCH} is not allowed to run on this agent"
+  exit 1
+fi

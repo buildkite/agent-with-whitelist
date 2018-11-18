@@ -1,0 +1,12 @@
+version: '3.6'
+services:
+  agent:
+    build: .
+    image: buildkite/k8s-charts-agent
+
+  tests:
+    image: bats/bats
+    volumes:
+      - ".:/app"
+    working_dir: /app
+    command: "tests"
