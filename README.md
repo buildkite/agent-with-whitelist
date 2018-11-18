@@ -34,7 +34,15 @@ Examples:
 
 ## Developing
 
+Running the tests:
+
+```bash
+docker-compose run --rm tests
+```
+
+Running an agent:
+
 ```bash
 docker-compose build && \
-docker-compose run --rm agent start --token 123
+docker-compose run --rm -e BUILDKITE_AGENT_WHITELIST_PIPELINES=xyz agent start --token 123
 ```

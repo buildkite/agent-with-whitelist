@@ -2,7 +2,10 @@ version: '3.6'
 services:
   agent:
     build: .
-    image: buildkite/k8s-charts-agent
+    image: buildkite/agent-with-whitelist
+    environment:
+      - BUILDKITE_AGENT_WHITELIST_PIPELINES
+      - BUILDKITE_AGENT_ALLOW_FORKS
 
   tests:
     image: bats/bats
