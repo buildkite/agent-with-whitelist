@@ -2,7 +2,7 @@ version: '3.6'
 services:
   agent:
     build: .
-    image: buildkite/agent-with-whitelist
+    image: buildkite/aws-agent-with-whitelist
     environment:
       - BUILDKITE_AGENT_WHITELIST_PIPELINES
       - BUILDKITE_AGENT_ALLOW_FORKS
