@@ -1,6 +1,6 @@
-# buildkite/agent-with-whitelist
+# buildkite/aws-agent-with-whitelist
 
-A [buildkite/agent](https://hub.docker.com/r/buildkite/agent/) image with the ability to whitelist which pipelines and branches can be run. This is done via the [environment hook](hooks/environment).
+A [buildkite/agent](https://hub.docker.com/r/buildkite/agent/) image with the AWS CLI, and the ability to whitelist which pipelines and branches can be run. This is done via the [environment hook](hooks/environment).
 
 ## Configuring
 
