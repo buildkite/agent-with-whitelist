@@ -10,7 +10,9 @@ RUN apk -v --update add \
       less \
       # and it uses mailcap for mimetypes
       mailcap \
-      && \
+      # and some projects use make \
+      make \
+    && \
     # Upgrade pip
     pip install --upgrade pip && \
     # Finally we install aws
